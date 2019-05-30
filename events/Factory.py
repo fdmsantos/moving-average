@@ -44,6 +44,7 @@ class Factory(object):
 
     @staticmethod
     def get_validations(event):
+        #validate nr_words e durantion negative values
         rule1 = IsRequired(event, "timestamp")
         rule2 = IsRequired(event, "translation_id", rule1)
         rule3 = IsRequired(event, "source_language", rule2)
