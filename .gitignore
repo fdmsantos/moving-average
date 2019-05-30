@@ -1,0 +1,7 @@
+# Terraform Files
+*.tfstate*
+*.tfvars
+.terraform
+
+# Intelij Idea Dir
+.idea/

@@ -1,0 +1,50 @@
+---
+- name: Deploy Moving Average App
+  hosts: all
+  become: true
+
+  vars:
+    user: "ubuntu"
+    group: "docker"
+    repo: "https://github.com/fdmsantos/moving-average.git"
+
+  tasks:
+    - name: Run apt-get update
+      apt:
+        update_cache: true
+
+    - name: ensure repository key is installed
+      apt_key:
+        id: "58118E89F3A912897C070ADBF76221572C52609D"
+        keyserver: "hkp://p80.pool.sks-keyservers.net:80"
+        state: present
+
+    - name: ensure docker registry is available
+      apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main' state=present
+
+    - name: instal docker and dependencies
+      apt: name=docker-engine update_cache=yes
+
+    - service: name=docker state=restarted
+
+    - name: install git
+      apt: name=git update_cache=yes
+
+    - name: adding existing user '{{ user }}' to group  '{{ group }}'
+      user:
+        name: '{{ user }}'
+        groups: '{{ group }}'
+        append: yes
+
+    - name: Clone Moving Average App
+      git:
+        repo: '{{ repo }}'
+        dest: /app
+
+    - name: Create Docker Image
+      command: docker build -t moving_average .
+      args:
+        chdir: /app/
+
+
+
