@@ -1,5 +1,7 @@
 class Event(object):
 
+    TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S.%f'
+
     timestamp = None
     translation_id = None
     source_language = None
