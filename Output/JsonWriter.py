@@ -4,6 +4,8 @@ import json
 
 class JsonWriter(OutputAbstract.OutputAbstract):
 
+    TYPES = ["json"]
+
     @staticmethod
     def write(results):
         for result in results:

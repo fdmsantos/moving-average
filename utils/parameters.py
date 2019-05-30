@@ -18,6 +18,14 @@ def parameters():
                         dest="window_size",
                         help="window size in minutes for which the output will be produced")
 
+    # TODO Implement choices - Use Strategy Folder?
+    parser.add_argument("-o", "--output-type",
+                        # type=lambda x: is_valid_file(parser, x),
+                        # choices=list(Color),
+                        default='json',
+                        dest="output_type",
+                        help="type of output")
+
     return parser.parse_args()
 
 

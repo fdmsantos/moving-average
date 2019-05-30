@@ -9,7 +9,7 @@ class Factory(object):
     @staticmethod
     def create_from_file(filename):
         return Factory.create_events(
-            Factory.get_file_extension_class(filename).read(
+            Factory.get_reader_class(filename).read(
                 open(filename, "r")
             )
         )
@@ -30,7 +30,7 @@ class Factory(object):
         return events_objects
 
     @staticmethod
-    def get_file_extension_class(filename):
+    def get_reader_class(filename):
         _, file_extension = os.path.splitext(filename)
         # TODO Invalid Extension
         if file_extension in JsonReader.JsonReader.EXTENSIONS:
