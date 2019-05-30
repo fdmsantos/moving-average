@@ -2,7 +2,7 @@ import unittest
 from events.Factory import Factory as EventFactory
 from events.Event import Event
 from datetime import datetime
-from MovingAverage import MovingAverage
+from moving_average import MovingAverage
 
 
 class CliTest(unittest.TestCase):
