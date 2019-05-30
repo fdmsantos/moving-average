@@ -1,11 +1,11 @@
 import os
 from Input import JsonReader
-from Event import Event
+from events.Event import Event
 from datetime import datetime
-from IsRequired import IsRequired
-from IsInteger import IsInteger
-from IsEquals import IsEquals
-from IsDateTimeFormat import IsDateTimeFormat
+from events.validations.IsRequired import IsRequired
+from events.validations.IsInteger import IsInteger
+from events.validations.IsEquals import IsEquals
+from events.validations.IsDateTimeFormat import IsDateTimeFormat
 
 
 class Factory(object):

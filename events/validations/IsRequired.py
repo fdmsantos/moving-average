@@ -1,4 +1,4 @@
-from RuleAbstract import RuleAbstract
+from events.validations.RuleAbstract import RuleAbstract
 
 
 class IsRequired(RuleAbstract):

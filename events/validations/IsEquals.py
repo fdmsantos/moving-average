@@ -1,10 +1,10 @@
-from RuleAbstract import RuleAbstract
+from events.validations.RuleAbstract import RuleAbstract
 
 
-class IsInteger(RuleAbstract):
+class IsEquals(RuleAbstract):
 
     def handle_request(self):
-        if not type(self.event[self.field]) == int:
+        if self.event[self.field] != self.value:
             return False
         else:
             return self._successor.handle_request() if self._successor is not None else True

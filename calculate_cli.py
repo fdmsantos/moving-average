@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from Factory import Factory as EventFactory
+from events.Factory import Factory as EventFactory
 from MovingAverage import MovingAverage
 from Output import Factory as OutputFactory
 from utils import parameters
