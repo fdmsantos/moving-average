@@ -2,7 +2,11 @@
 from Factory import Factory
 from MovingAverage import MovingAverage
 from Output import JsonWriter
+from utils import parameters
 
-average = MovingAverage(Factory.create_from_file("events.json"), 10)
+args = parameters.parameters()
+average = MovingAverage(Factory.create_from_file(args.file), args.window_size)
 results = average.calculate()
 JsonWriter.JsonWriter.write(results)
+
+

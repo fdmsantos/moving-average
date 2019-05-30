@@ -7,8 +7,12 @@ from datetime import datetime
 class Factory(object):
 
     @staticmethod
-    def create_from_file(file):
-        return Factory.create_events(Factory.get_file_extension_class(file).read(file))
+    def create_from_file(filename):
+        return Factory.create_events(
+            Factory.get_file_extension_class(filename).read(
+                open(filename, "r")
+            )
+        )
 
     @staticmethod
     def create_events(events):
@@ -26,8 +30,8 @@ class Factory(object):
         return events_objects
 
     @staticmethod
-    def get_file_extension_class(file):
-        _, file_extension = os.path.splitext(file)
+    def get_file_extension_class(filename):
+        _, file_extension = os.path.splitext(filename)
         # TODO Invalid Extension
         if file_extension in JsonReader.JsonReader.EXTENSIONS:
             return JsonReader.JsonReader

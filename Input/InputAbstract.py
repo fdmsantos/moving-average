@@ -5,5 +5,5 @@ class InputAbstract(ABC):
 
     @staticmethod
     @abstractmethod
-    def read(filename):
+    def read(file):
         """Required Method"""
