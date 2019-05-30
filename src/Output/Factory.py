@@ -1,4 +1,4 @@
-from Output import JsonWriter
+from src.Output import JsonWriter
 
 
 class Factory(object):

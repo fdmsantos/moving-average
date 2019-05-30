@@ -1,8 +1,8 @@
 import unittest
-from events.Factory import Factory as EventFactory
-from events.Event import Event
+from src.events.Factory import Factory as EventFactory
+from src.events.Event import Event
 from datetime import datetime
-from moving_average import MovingAverage
+from src.moving_average import MovingAverage
 
 
 class CliTest(unittest.TestCase):
@@ -15,14 +15,14 @@ class CliTest(unittest.TestCase):
             Test the Event function
         """
         event = dict()
-        event["timestamp"]       = "2018-12-26 18:11:08.509654"
-        event["translation_id"]  = "5aa5b2f39f7254a75aa5"
+        event["timestamp"] = "2018-12-26 18:11:08.509654"
+        event["translation_id"] = "5aa5b2f39f7254a75aa5"
         event["source_language"] = "en"
         event["target_language"] = "fr"
-        event["client_name"]     = "easyjet"
-        event["event_name"]      = "translation_delivered"
-        event["nr_words"]        = 30
-        event["duration"]        = 20
+        event["client_name"] = "easyjet"
+        event["event_name"] = "translation_delivered"
+        event["nr_words"] = 30
+        event["duration"] = 20
 
         self.assertTrue(EventFactory.get_validations(event).handle_request(), "Test a good event")
 

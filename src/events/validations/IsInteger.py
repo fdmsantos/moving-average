@@ -1,4 +1,4 @@
-from events.validations.RuleAbstract import RuleAbstract
+from src.events.validations.RuleAbstract import RuleAbstract
 
 
 class IsInteger(RuleAbstract):

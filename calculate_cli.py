@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from events.Factory import Factory as EventFactory
-from moving_average import MovingAverage
-from Output import Factory as OutputFactory
-from utils import parameters
+from src.events.Factory import Factory as EventFactory
+from src.moving_average import MovingAverage
+from src.Output import Factory as OutputFactory
+from src.utils import parameters
 
 args = parameters.parameters()
 

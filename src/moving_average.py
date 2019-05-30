@@ -1,5 +1,5 @@
 from datetime import timedelta
-from Result import Result
+from src.Result import Result
 
 
 class MovingAverage(object):
