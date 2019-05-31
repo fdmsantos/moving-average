@@ -85,7 +85,7 @@ rm key key.pub
 ```bash
 
 # path : moving-average/deploy-aws
-ssh -i key ubuntu@52.214.124.243
+ssh -i key ubuntu@$(terraform output InstancePublicIP)
 cd /app
 docker run --rm -v $(pwd)/data:/data moving_average -i /data/events.json -w 10
 ```
