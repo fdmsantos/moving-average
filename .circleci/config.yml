@@ -9,8 +9,28 @@ jobs:
       - run:
           name: Run unit testing
           command: python test_calculate_cli.py
+  build:
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Build Docker Image
+          command: docker build -t moving_average .
+
+      - run: mkdir -p docker-cache
+      - run: docker save -o docker-cache/built-image.tar moving-average
+
+      - save_cache:
+          key: docker-key
+          paths:
+            - docker-cache
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - test
+      - build:
+          requires:
+            - test
+          context: moving-average

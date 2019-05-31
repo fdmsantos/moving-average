@@ -36,7 +36,7 @@ class CliTest(unittest.TestCase):
 
         event_temp = dict(event)
         del event_temp["source_language"]
-        self.assertTrue(EventFactory.get_validations(event_temp).handle_request(), "Test source_language missing event")
+        self.assertFalse(EventFactory.get_validations(event_temp).handle_request(), "Test source_language missing event")
 
         event_temp = dict(event)
         del event_temp["target_language"]
