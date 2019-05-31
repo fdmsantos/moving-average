@@ -25,7 +25,7 @@ run-tests:
 	python test_calculate_cli.py
 
 wait:
-	sleep 10
+	sleep 20
 
 build-aws: create-ssh-keys build-terraform wait ansible
 
