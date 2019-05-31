@@ -1,3 +1,16 @@
+# Description
+
+Build a simple command line application that parses a stream of events and produces an aggregated output. 
+In this case, we're interested in calculating, for every minute, a moving average of the translation delivery time for the last X minutes.
+
+# Usage
+
+```bash
+./calculate_cli.py -h
+
+./calculate_cli.py --input_file data/events.json --window_size 10 -o json
+```
+
 # Deploy
 
 ## Docker
