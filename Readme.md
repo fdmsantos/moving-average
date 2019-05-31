@@ -121,11 +121,11 @@ If you want add new input type like csv, yaml, xml, ... you need do the follow.
 
 ```python
 def get_reader_class(filename):
-        _, file_extension = os.path.splitext(filename)
-        if file_extension in JsonReader.JsonReader.EXTENSIONS:
-            return JsonReader.JsonReader
-        if file_extension in CsvReader.CsvReader.EXTENSIONS:
-            return CsvReader.CsvReader
+    _, file_extension = os.path.splitext(filename)
+    if file_extension in JsonReader.JsonReader.EXTENSIONS:
+        return JsonReader.JsonReader
+    if file_extension in CsvReader.CsvReader.EXTENSIONS:
+        return CsvReader.CsvReader
 ```
 
 ## Add new Output type
@@ -143,8 +143,35 @@ If you want add new Output type like csv, yaml, xml, ... you need do the follow.
 
 ```python
 def get_writer_class(output_type):
-        if output_type in JsonWriter.JsonWriter.TYPES:
-            return JsonWriter.JsonWriter
-        if output_type in XmlWriter.XmlWriter.TYPES:
-            return XmlWriter.XmlWriter
+    if output_type in JsonWriter.JsonWriter.TYPES:
+        return JsonWriter.JsonWriter
+    if output_type in XmlWriter.XmlWriter.TYPES:
+        return XmlWriter.XmlWriter
+```
+
+
+## Add new Validation to Event
+
+The Event validation process use the Chain of Responsibility Design Pattern.
+**Example**: Lets add a validation to not permit the source_language and target_language are equals
+
+1. Create a file (FieldsNotEquals.py) in src/events/validations/
+2. In this file you need create a Class which extends RuleAbstract Class
+3. When extends RuleAbstract class, you need implement the method handle_request. This method return false if the validation fail or run the next validation
+4. Use [IsRequired](src/events/validations/IsRequired.py) as example
+
+```python
+def handle_request(self):
+    if : # The condition to validation fail
+        return False
+    return self._successor.handle_request() if self._successor is not None else True
+```
+
+5. In get_validations method from [Events Factory class](src/events/Factory.py), you need add the new validation to the chain. Don't forget import and return the last validation
+
+```python
+rule11 = IsEquals(event, "event_name", rule10, "translation_delivered")
+rule12 = IsDateTimeFormat(event, "timestamp", rule11, Event.TIMESTAMP_FORMAT)
+newRule = FieldsNotEquals(event, "source_language|target_language", rule12)
+return newRule
 ```
