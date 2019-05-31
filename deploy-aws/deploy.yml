@@ -28,6 +28,10 @@
     - name: Restart Docker service
       service: name=docker state=restarted
 
+
+    - name: install make
+      apt: name=make update_cache=yes
+
     - name: install git
       apt: name=git update_cache=yes
 
@@ -43,7 +47,7 @@
         dest: /app
 
     - name: Create Docker Image
-      command: docker build -t moving_average .
+      command: make build-docker
       args:
         chdir: /app
 

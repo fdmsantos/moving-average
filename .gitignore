@@ -5,3 +5,6 @@
 
 # Intelij Idea Dir
 .idea/
+
+# SSH Keys
+deploy-aws/key*
