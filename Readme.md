@@ -100,3 +100,31 @@ python test_calculate_cli.py
 # Or
 make run-tests
 ```
+
+# Extend Moving Average App
+
+You are welcome to improve/add new features.
+Please read this section before starts write new code
+
+## Add new Input Type
+
+The moving average app uses Strategy Design Pattern to add new input type.
+If you want add new input type like csv, yaml, xml, ... you need do the follow.
+**Example**: Lets add csv input type
+
+1. Create a file (CsvReader.py) in src/input
+2. In this file you need create a Class which extends InputAbstract Class
+3. When extends InputAbstract class, you need implement the method read. This method will receive filename and need return a dict
+4. Create EXTENSIONS Constant with all file extensions will use the new input type. For this case is .csv. If you want implement yml, you can use .yml or .yaml
+5. Use [JsonReader](src/Input/JsonReader.py) as example
+6. In get_reader_class method from [Events Factory class](src/events/validations/Factory.py), you need add the new input type. Don't forget import
+
+```python
+def get_reader_class(filename):
+        _, file_extension = os.path.splitext(filename)
+        # TODO Invalid Extension
+        if file_extension in JsonReader.JsonReader.EXTENSIONS:
+            return JsonReader.JsonReader
+        if file_extension in CsvReader.CsvReader.EXTENSIONS:
+                    return CsvReader.CsvReader
+```
