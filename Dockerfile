@@ -9,4 +9,4 @@ RUN mkdir /data
 
 WORKDIR /app
 
-ENTRYPOINT [ "python", "./calculate_cli.py" ]
+#ENTRYPOINT [ "python", "./calculate_cli.py" ]
