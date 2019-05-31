@@ -18,7 +18,3 @@ variable "env" {
 variable "api_name" {
   default = "moving-average"
 }
-
-variable "public_key" {
-
-}
