@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Build Docker Image
-          command: docker build -t moving_average .
+          command: docker build -t moving-average .
 
       - run: mkdir -p docker-cache
       - run: docker save -o docker-cache/built-image.tar moving-average
