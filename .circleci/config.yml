@@ -33,9 +33,11 @@ jobs:
           keys:
             - docker-key
       - run: docker load < docker-cache/built-image.tar
-      - run: docker tag payments-api $DOCKER_USER/payments-api
+      - run: docker tag moving-average $DOCKER_USER/moving-average
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push $DOCKER_USER/payments-api
+      - run: docker push $DOCKER_USER/moving-average
+
+
 workflows:
   version: 2
   build-and-deploy:
