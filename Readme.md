@@ -65,7 +65,7 @@ ssh-keygen -t rsa -b 4096 -N ""
 
 # Deploy AWS Infra
 terraform init
-terraform apply -auto-approve
+terraform apply
 
 # Configure EC2 Instance and Deploy moving average app on EC2 Instance
 ansible-playbook -u ubuntu --key-file key -i $(terraform output InstancePublicIP), deploy.yml
