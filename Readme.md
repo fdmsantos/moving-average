@@ -117,7 +117,7 @@ If you want add new input type like csv, yaml, xml, ... you need do the follow.
 3. When extends InputAbstract class, you need implement the method read. This method will receive filename and need return a dict
 4. Create EXTENSIONS Constant with all file extensions will use the new input type. For this case is .csv. If you want implement yml, you can use .yml or .yaml
 5. Use [JsonReader](src/Input/JsonReader.py) as example
-6. In get_reader_class method from [Events Factory class](src/events/validations/Factory.py), you need add the new input type. Don't forget import
+6. In get_reader_class method from [Events Factory class](src/events/Factory.py), you need add the new input type. Don't forget import
 
 ```python
 def get_reader_class(filename):
