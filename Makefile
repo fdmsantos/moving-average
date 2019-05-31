@@ -18,6 +18,12 @@ destroy-terraform:
 ansible:
 	cd deploy-aws; ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -u $(remote_ssh_user) --key-file key -i $$(terraform output InstancePublicIP), deploy.yml
 
+build-docker:
+	docker build -t moving_average .
+
+run-tests:
+	python test_calculate_cli.py
+
 wait:
 	sleep 10
 
