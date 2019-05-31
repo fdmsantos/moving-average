@@ -112,9 +112,9 @@ The moving average app uses Strategy Design Pattern to add new input type.
 If you want add new input type like csv, yaml, xml, ... you need do the follow.
 **Example**: Lets add csv input type
 
-1. Create a file (CsvReader.py) in src/input
+1. Create a file (CsvReader.py) in src/Input
 2. In this file you need create a Class which extends InputAbstract Class
-3. When extends InputAbstract class, you need implement the method read. This method will receive filename and need return a dict
+3. When extends InputAbstract class, you need implement the method read. This method receive filename and need return a dict
 4. Create EXTENSIONS Constant with all file extensions will use the new input type. For this case is .csv. If you want implement yml, you can use .yml or .yaml
 5. Use [JsonReader](src/Input/JsonReader.py) as example
 6. In get_reader_class method from [Events Factory class](src/events/Factory.py), you need add the new input type. Don't forget import
@@ -122,9 +122,29 @@ If you want add new input type like csv, yaml, xml, ... you need do the follow.
 ```python
 def get_reader_class(filename):
         _, file_extension = os.path.splitext(filename)
-        # TODO Invalid Extension
         if file_extension in JsonReader.JsonReader.EXTENSIONS:
             return JsonReader.JsonReader
         if file_extension in CsvReader.CsvReader.EXTENSIONS:
-                    return CsvReader.CsvReader
+            return CsvReader.CsvReader
+```
+
+## Add new Output type
+
+Like the input type process, in output type, the moving average app also uses Strategy Design Pattern.
+If you want add new Output type like csv, yaml, xml, ... you need do the follow.
+**Example**: Lets add xml input type
+
+1. Create a file (XmlWriter.py) in src/Output
+2. In this file you need create a Class which extends OutputAbstract Class
+3. When extends InputAbstract class, you need implement the method write. This method receive Result Objects Array.
+4. Create TYPES Constant with all ouput types which use the new ouput type. For this case is xml.
+5. Use [JsonWriter](src/Output/JsonWriter.py) as example
+6. In get_writer_class method from [Output Factory class](src/Output/Factory.py), you need add the new output type. Don't forget import
+
+```python
+def get_writer_class(output_type):
+        if output_type in JsonWriter.JsonWriter.TYPES:
+            return JsonWriter.JsonWriter
+        if output_type in XmlWriter.XmlWriter.TYPES:
+            return XmlWriter.XmlWriter
 ```
