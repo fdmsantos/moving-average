@@ -4,8 +4,6 @@ from src.moving_average import MovingAverage
 from src.Output import Factory as OutputFactory
 from src.utils import parameters
 
-print("hello circleci")
-
 args = parameters.parameters()
 
 results = MovingAverage(
