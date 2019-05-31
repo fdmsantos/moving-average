@@ -42,9 +42,14 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+data "local_file" "public_key" {
+  filename = "key.pub"
+}
+
+
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "${var.public_key}"
+  public_key = "${data.local_file.public_key.content}"
 }
 
 resource "aws_security_group" "allow_ssh" {
