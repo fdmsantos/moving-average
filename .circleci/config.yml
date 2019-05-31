@@ -1,0 +1,11 @@
+version: 2.1
+
+jobs:
+  tests:  # required for runs that don't use workflows
+    working_directory: ~/moving-average
+    docker:
+      - image: circleci/python:3.6.4  # primary container for the build job
+    steps:
+      - run:
+          command: |
+            python test_calculate_cli.py
