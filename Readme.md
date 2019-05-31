@@ -61,7 +61,7 @@ make build-aws
 git clone https://github.com/fdmsantos/moving-average
 cd moving-average/deploy-aws
 # Generate SSH Keys
-ssh-keygen -t rsa -b 4096 -N ""
+ssh-keygen -t rsa -b 4096 -N "" -f $(pwd)/key
 
 # Deploy AWS Infra
 terraform init
@@ -71,16 +71,7 @@ terraform apply
 ansible-playbook -u ubuntu --key-file key -i $(terraform output InstancePublicIP), deploy.yml
 ```
 
-**Destroy**
-
-```bash
-make destroy-aws
-# or (path: moving-average/deploy-aws)
-terraform destroy
-rm key key.pub
-```
-
-### Test
+**Test**
 
 ```bash
 
@@ -90,6 +81,15 @@ cd /app
 docker run --rm -v $(pwd)/data:/data moving_average -i /data/events.json -w 10
 ```
 
+
+**Destroy**
+
+```bash
+make destroy-aws
+# or (path: moving-average/deploy-aws)
+terraform destroy
+rm key key.pub
+```
 
 # Run Tests
 
