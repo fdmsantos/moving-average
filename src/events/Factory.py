@@ -6,13 +6,14 @@ from src.events.validations.IsRequired import IsRequired
 from src.events.validations.IsInteger import IsInteger
 from src.events.validations.IsEquals import IsEquals
 from src.events.validations.IsDateTimeFormat import IsDateTimeFormat
+from src.exceptions.NoEventsException import NoEventsException
+from src.exceptions.InputFileTypeNotSupportedException import  InputFileTypeNotSupportedException
 
 
 class Factory(object):
 
     @staticmethod
     def create_from_file(filename):
-        # TODO Exception No Events
         return Factory.create_events(
             Factory.get_reader_class(filename).read(
                 open(filename, "r")
@@ -21,6 +22,10 @@ class Factory(object):
 
     @staticmethod
     def create_events(events):
+
+        if len(events) == 0:
+            raise NoEventsException("Input File doesn't has valid events")
+
         events_objects = []
         for event in events:
 
@@ -33,18 +38,19 @@ class Factory(object):
                                             event["event_name"],
                                             event["duration"],
                                             event["nr_words"]))
+
         return events_objects
 
     @staticmethod
     def get_reader_class(filename):
         _, file_extension = os.path.splitext(filename)
-        # TODO Invalid Extension
         if file_extension in JsonReader.JsonReader.EXTENSIONS:
             return JsonReader.JsonReader
+        else:
+            raise InputFileTypeNotSupportedException("Input File Extension not supported")
 
     @staticmethod
     def get_validations(event):
-        #validate nr_words e durantion negative values
         rule1 = IsRequired(event, "timestamp")
         rule2 = IsRequired(event, "translation_id", rule1)
         rule3 = IsRequired(event, "source_language", rule2)

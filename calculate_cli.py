@@ -4,14 +4,18 @@ from src.moving_average import MovingAverage
 from src.Output import Factory as OutputFactory
 from src.utils import parameters
 
-args = parameters.parameters()
 
-results = MovingAverage(
-    EventFactory.create_from_file(args.file),
-    args.window_size
-).calculate()
+try:
+    args = parameters.parameters()
 
-OutputFactory.Factory.print(args.output_type, results)
+    results = MovingAverage(
+        EventFactory.create_from_file(args.file),
+        args.window_size
+    ).calculate()
 
+    OutputFactory.Factory.print(args.output_type, results)
+
+except Exception as e:
+    print("Please check the follow error: " + str(e))
 
 
