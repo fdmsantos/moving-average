@@ -7,13 +7,16 @@ from src.events.validations.IsInteger import IsInteger
 from src.events.validations.IsEquals import IsEquals
 from src.events.validations.IsDateTimeFormat import IsDateTimeFormat
 from src.exceptions.NoEventsException import NoEventsException
-from src.exceptions.InputFileTypeNotSupportedException import  InputFileTypeNotSupportedException
+from src.exceptions.InputFileTypeNotSupportedException import InputFileTypeNotSupportedException
+import logging
 
 
 class Factory(object):
 
     @staticmethod
     def create_from_file(filename):
+        logging.debug('Create events from file')
+
         return Factory.create_events(
             Factory.get_reader_class(filename).read(
                 open(filename, "r")
