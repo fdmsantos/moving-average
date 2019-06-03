@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 import os
 import logging
-
+import glob
 
 def parameters():
 
@@ -15,18 +15,21 @@ def parameters():
 
     parser.add_argument("-w", "--window_size",
                         type=lambda x: is_valid_window_size(parser, x),
-                        required=True,
+                        default=10,
                         dest="window_size",
                         help="window size in minutes for which the output will be produced",
                         metavar="INT")
 
-    # TODO Implement choices - Use Strategy Folder?
     parser.add_argument("-o", "--output-type",
-                        # type=lambda x: is_valid_file(parser, x),
-                        # choices=list(Color),
                         default='json',
                         dest="output_type",
                         help="type of output",
+                        metavar="STRING")
+
+    parser.add_argument("-a", "--aggregation",
+                        default="AVG",
+                        dest="aggregation",
+                        help="Choose the aggregation to calculate",
                         metavar="STRING")
 
     args = parser.parse_args()

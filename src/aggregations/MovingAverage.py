@@ -1,16 +1,12 @@
 from datetime import timedelta
 from src.Result import Result
 import logging
+from src.aggregations.AggregationsAbstract import AggregationsAbstract
 
 
-class MovingAverage(object):
+class MovingAverage(AggregationsAbstract):
 
-    events = None
-    window_size = None
-
-    def __init__(self, events, window_size):
-        self.events = events
-        self.window_size = window_size
+    TYPE = "AVG"
 
     def calculate(self):
         logging.debug("calculating moving average")
