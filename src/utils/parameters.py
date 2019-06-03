@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 import os
 import logging
-import glob
+
 
 def parameters():
 

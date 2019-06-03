@@ -137,8 +137,10 @@ def get_reader_class(filename):
     _, file_extension = os.path.splitext(filename)
     if file_extension in JsonReader.JsonReader.EXTENSIONS:
         return JsonReader.JsonReader
-    if file_extension in CsvReader.CsvReader.EXTENSIONS:
+    elif file_extension in CsvReader.CsvReader.EXTENSIONS:
         return CsvReader.CsvReader
+    else:
+        raise ...
 ```
 
 ## Add new Output type
@@ -158,8 +160,11 @@ If you want add new Output type like csv, yaml, xml, ... you need do the follow.
 def get_writer_class(output_type):
     if output_type in JsonWriter.JsonWriter.TYPES:
         return JsonWriter.JsonWriter
-    if output_type in XmlWriter.XmlWriter.TYPES:
+    elif output_type in XmlWriter.XmlWriter.TYPES:
         return XmlWriter.XmlWriter
+    else:
+        raise ...
+
 ```
 
 
@@ -187,4 +192,36 @@ rule11 = IsEquals(event, "event_name", rule10, "translation_delivered")
 rule12 = IsDateTimeFormat(event, "timestamp", rule11, Event.TIMESTAMP_FORMAT)
 newRule = FieldsNotEquals(event, "source_language|target_language", rule12)
 return newRule
+```
+
+
+## Add new Aggregation Type
+
+Is possible add news aggregation types
+If you want add new aggregation type like min, max, sum ... you need do the follow.
+**Example**: Lets add min aggregation type
+
+1. Create a file (MovingMin.py) in src/aggregations
+2. In this file you need create a Class which extends AggregationsAbstract Class
+3. When extends AggregationsAbstract class, you need implement the method calculate. This method receive the events and window size and return the result
+4. Create TYPE Constant with the type name. For this case is MIN.
+5. Use [MovingAverage](src/aggregations/MovingAverage.py) as example
+6. In calculate method from [Aggregations Factory class](src/aggregations/Factory.py), you need add the new aggregation type. Don't forget import
+
+```python
+def calculate(type, events, window_size):
+
+    if type == MovingAverage.TYPE:
+        aggregation = MovingAverage(
+            events,
+            window_size
+        )
+    elif type == MovingMin.TYPE:
+             aggregation = MovingMin(
+                 events,
+                 window_size
+             )
+    else:
+        raise AggregationNotSupportedException("Aggregation Type not supported")
+    return aggregation.calculate()
 ```
