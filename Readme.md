@@ -124,6 +124,11 @@ There is 3 Steps:
 2. Build -> Creates a docker image based on Dockerfile
 3. Publish -> Push the docker image to docker docker hub
 
+
+# Log
+
+Every time you run the app is run, is created a log file in data/log
+
 # Extend Moving Average App
 
 You are welcome to improve/add new features.

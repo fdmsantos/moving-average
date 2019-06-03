@@ -8,7 +8,7 @@ import logging
 
 try:
 
-    logging.basicConfig(filename='log', filemode="w", format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
+    logging.basicConfig(filename='data/log', filemode="w", format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
     args = parameters.parameters()
 
     results = AggregationsFactory.calculate(args.aggregation, EventFactory.create_from_file(args.file), args.window_size)
