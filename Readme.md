@@ -114,6 +114,16 @@ python test_calculate_cli.py
 make run-tests
 ```
 
+# CI/CD
+
+Continuous integration / continuous delivery is implemented with circleCI
+
+There is 3 Steps:
+
+1. test -> Creates a docker container with python 3.6.7 image and run the tests
+2. Build -> Creates a docker image based on Dockerfile
+3. Publish -> Push the docker image to docker docker hub
+
 # Extend Moving Average App
 
 You are welcome to improve/add new features.

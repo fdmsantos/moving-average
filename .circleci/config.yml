@@ -1,9 +1,9 @@
 version: 2.1
 
 jobs:
-  test:  # required for runs that don't use workflows
+  test:
     docker:
-      - image: circleci/python:3.6.4  # primary container for the build job
+      - image: circleci/python:3.6.4
     steps:
       - checkout
       - run:
