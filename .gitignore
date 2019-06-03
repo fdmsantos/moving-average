@@ -8,3 +8,6 @@
 
 # SSH Keys
 deploy-aws/key*
+
+# Ignore Log
+log
