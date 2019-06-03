@@ -118,11 +118,11 @@ make run-tests
 
 Continuous integration / continuous delivery is implemented with circleCI
 
-There is 3 Steps:
+There are 3 Steps:
 
 1. test -> Creates a docker container with python 3.6.7 image and run the tests
 2. Build -> Creates a docker image based on Dockerfile
-3. Publish -> Push the docker image to docker docker hub
+3. Publish -> Push the docker image to docker hub
 
 
 # Log
@@ -136,16 +136,16 @@ Please read this section before starts write new code
 
 ## Add new Input Type
 
-The moving average app uses Strategy Design Pattern to add new input type.
-If you want add new input type like csv, yaml, xml, ... you need do the follow.
-**Example**: Lets add csv input type
+The moving average app uses the Strategy Design Pattern to add new input type.
+If you want add a new input type like csv, yaml, xml, ... you need to do the following.
+**Example**: Let's add csv input type
 
 1. Create a file (CsvReader.py) in src/Input
-2. In this file you need create a Class which extends InputAbstract Class
-3. When extends InputAbstract class, you need implement the method read. This method receive filename and need return a dict
-4. Create EXTENSIONS Constant with all file extensions will use the new input type. For this case is .csv. If you want implement yml, you can use .yml or .yaml
+2. In this file, you need to create a Class which extends InputAbstract Class
+3. When extends InputAbstract class, you need to implement the method read. This method receives filename and returns a dict
+4. Create EXTENSIONS Constant with all file extensions will use the new input type. For this case is .csv. If you want to implement yml, you can use .yml or .yaml
 5. Use [JsonReader](src/input/JsonReader.py) as example
-6. In get_reader_class method from [Events Factory class](src/events/Factory.py), you need add the new input type. Don't forget import
+6. In get_reader_class method from [Events Factory class](src/events/Factory.py), you need to add the new input type. Don't forget the import
 
 ```python
 def get_reader_class(filename):
@@ -160,16 +160,16 @@ def get_reader_class(filename):
 
 ## Add new Output type
 
-Like the input type process, in output type, the moving average app also uses Strategy Design Pattern.
-If you want add new Output type like csv, yaml, xml, ... you need do the follow.
-**Example**: Lets add xml input type
+Like the input type process, an output type, the moving average app also uses the Strategy Design Pattern.
+If you want to add a new Output type like csv, yaml, xml, ... you need to do the following.
+**Example**: Let's add xml input type
 
 1. Create a file (XmlWriter.py) in src/Output
-2. In this file you need create a Class which extends OutputAbstract Class
-3. When extends InputAbstract class, you need implement the method write. This method receive Result Objects Array.
-4. Create TYPES Constant with all ouput types which use the new ouput type. For this case is xml.
+2. In this file, you need to create a Class which extends OutputAbstract Class
+3. When extends InputAbstract class, you need to implement the method write. This method receives an Result Object Array.
+4. Create TYPES Constant with all output types which use the new output type. For this case is xml.
 5. Use [JsonWriter](src/output/JsonWriter.py) as example
-6. In get_writer_class method from [Output Factory class](src/output/Factory.py), you need add the new output type. Don't forget import
+6. In get_writer_class method from [Output Factory class](src/output/Factory.py), you need to add the new output type. Don't forget the import
 
 ```python
 def get_writer_class(output_type):
@@ -185,12 +185,12 @@ def get_writer_class(output_type):
 
 ## Add new Validation to Event
 
-The Event validation process use the Chain of Responsibility Design Pattern.
-**Example**: Lets add a validation to not permit the source_language and target_language are equals
+The Event validation process uses the Chain of Responsibility Design Pattern.
+**Example**: Let's add a validation to not permit the source_language and target_language are equals
 
 1. Create a file (FieldsNotEquals.py) in src/events/validations/
-2. In this file you need create a Class which extends RuleAbstract Class
-3. When extends RuleAbstract class, you need implement the method handle_request. This method return false if the validation fail or run the next validation
+2. In this file, you need to create a Class which extends RuleAbstract Class
+3. When extends RuleAbstract class, you need to implement the method handle_request. This method returns false if the validation fails or run the next validation
 4. Use [IsRequired](src/events/validations/IsRequired.py) as example
 
 ```python
@@ -212,13 +212,13 @@ return newRule
 
 ## Add new Aggregation Type
 
-Is possible add news aggregation types
-If you want add new aggregation type like min, max, sum ... you need do the follow.
-**Example**: Lets add min aggregation type
+Is possible to add news aggregation types.
+If you want to add new aggregation type like min, max, sum ... you need do the following.
+**Example**: Let's add min aggregation type
 
 1. Create a file (MovingMin.py) in src/aggregations
-2. In this file you need create a Class which extends AggregationsAbstract Class
-3. When extends AggregationsAbstract class, you need implement the method calculate. This method receive the events and window size and return the result
+2. In this file, you need to create a Class which extends AggregationsAbstract Class
+3. When extends AggregationsAbstract class, you need to implement the method calculate. This method receives the events and window size and returns the result
 4. Create TYPE Constant with the type name. For this case is MIN.
 5. Use [MovingAverage](src/aggregations/MovingAverage.py) as example
 6. In calculate method from [Aggregations Factory class](src/aggregations/Factory.py), you need add the new aggregation type. Don't forget import
