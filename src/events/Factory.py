@@ -1,5 +1,5 @@
 import os
-from src.Input import JsonReader
+from src.input import JsonReader
 from src.events.Event import Event
 from datetime import datetime
 from src.events.validations.IsRequired import IsRequired

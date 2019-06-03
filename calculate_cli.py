@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from src.events.Factory import Factory as EventFactory
-from src.Output import Factory as OutputFactory
+from src.output import Factory as OutputFactory
 from src.utils import parameters
 from src.aggregations.Factory import Factory as AggregationsFactory
 import logging

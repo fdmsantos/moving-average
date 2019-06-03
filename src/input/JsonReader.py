@@ -1,4 +1,4 @@
-from src.Input import InputAbstract
+from src.input import InputAbstract
 import json
 
 

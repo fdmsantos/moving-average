@@ -1,4 +1,4 @@
-from src.Output import OutputAbstract
+from src.output import OutputAbstract
 import json
 import logging
 

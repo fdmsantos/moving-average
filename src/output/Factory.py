@@ -1,4 +1,4 @@
-from src.Output import JsonWriter
+from src.output import JsonWriter
 from src.exceptions.OutputTypeNotSupportedException import OutputTypeNotSupportedException
 
 
